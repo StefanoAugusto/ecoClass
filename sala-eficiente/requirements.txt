@@ -1,0 +1,7 @@
+# Dependencias do servidor (Raspberry Pi)
+# Instale dentro de um ambiente virtual:
+#   python3 -m venv venv && source venv/bin/activate
+#   pip install -r requirements.txt
+
+Flask>=3.0
+pyserial>=3.5     # comunicacao com o Arduino (nao usado no modo MOCK)

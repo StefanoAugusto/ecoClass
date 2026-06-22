@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-state="yellow">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sala Eficiente · Smart Campus</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css', v='5') }}" />
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+
+  <main class="board">
+
+    <header class="topbar">
+      <div class="brand">
+        <span class="leaf" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 4 13c0-5 5-9 13-10 .5 6-2 14-6 17z"/>
+            <path d="M5 20c4-3 6-6 7-10"/>
+          </svg>
+        </span>
+        <div class="brand-text">
+          <h1>Sala Eficiente</h1>
+          <p>Smart Campus · Laboratório</p>
+        </div>
+      </div>
+
+      <div class="conn" id="conn" data-status="connecting">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="conn-label" id="conn-label">conectando…</span>
+      </div>
+    </header>
+
+    <section class="hero" aria-live="polite">
+      <span class="hero-eyebrow" id="hero-eyebrow">Estado da sala</span>
+      <h2 class="hero-status" id="hero-status">—</h2>
+      <p class="hero-sub" id="hero-sub">Aguardando dados do sensor…</p>
+      <span class="live" id="live" aria-hidden="true">
+        <span class="live-dot"></span> ao vivo
+      </span>
+    </section>
+
+    <section class="cards">
+      <article class="card" id="card-presence" data-on="false">
+        <span class="card-label">Presença</span>
+        <strong class="card-value" id="presence-value">—</strong>
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor"
+               stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="7" r="3.2"/>
+            <path d="M5.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/>
+          </svg>
+        </span>
+      </article>
+
+      <article class="card" id="card-light" data-on="false">
+        <span class="card-label">Luz</span>
+        <strong class="card-value" id="light-value">—</strong>
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor"
+               stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18h6"/><path d="M10 21h4"/>
+            <path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 3z"/>
+          </svg>
+        </span>
+      </article>
+    </section>
+
+    <section class="sensors">
+      <h3 class="sensors-title">Sensores</h3>
+
+      <div class="sensor-row">
+        <span class="sensor-name">Luminosidade</span>
+        <div class="gauge">
+          <div class="gauge-fill" id="light-bar"></div>
+          <div class="gauge-mark" id="threshold-mark" title="limiar"></div>
+        </div>
+        <span class="sensor-read" id="light-raw">— / 1023</span>
+      </div>
+
+      <div class="sensor-row">
+        <span class="sensor-name">Movimento</span>
+        <span class="sensor-text" id="movements">— nos últimos 30s</span>
+      </div>
+    </section>
+
+    <div class="buzzer" id="buzzer" hidden role="alert">
+      <span class="buzzer-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.3 3.3a2.4 2.4 0 0 1 3.4 0l7 7a2.4 2.4 0 0 1 0 3.4l-3.6 3.6a2.4 2.4 0 0 1-3.4 0l-7-7a2.4 2.4 0 0 1 0-3.4z"/>
+          <path d="M12 9v3"/><path d="M12 15h.01"/>
+        </svg>
+      </span>
+      <span>Buzzer ativo — desperdício de energia prolongado</span>
+    </div>
+
+    <footer class="foot">
+      Hardware Architecture · ATITUS
+    </footer>
+  </main>
+
+  <div class="reconnect" id="reconnect" hidden>
+    <div class="reconnect-card">
+      <span class="reconnect-spin" aria-hidden="true"></span>
+      <strong>Reconectando ao servidor…</strong>
+      <span>Verifique se o servidor está rodando no Raspberry Pi.</span>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='app.js', v='7') }}"></script>
+</body>
+</html>
